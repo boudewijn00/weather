@@ -1,0 +1,48 @@
+{{#if (isEmpty ip)}}
+    <div class="flex justify-center p-10">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="getIp()">
+            Get location based weather
+        </button>
+    </div>
+{{else}}
+    <div class="bg-gray-100 p-2">
+    <div class="flex justify-between items-center">
+        {{#if (isNotEmpty last_update)}}
+        <div class="basis-2/5">
+        last update: {{getDate last_update}}/{{getMonth last_update}} {{getHours last_update}}:{{getMinutes last_update}}
+        city: {{city}}
+        ip: {{ip}}
+        </div>
+        {{/if}}
+        <div class="basis-2/5" id="ipAddress"></div>
+    </div>
+    </div>
+{{/if}}
+
+{{#if dates}}
+    <div class="container mx-auto text-4xl md:max-w-4xl sm:max-w-full">
+    {{#each dates}}
+        <div class="m-2 p-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg shadow-lg">
+        <p class="text-4xl font-semibold">{{@key}}</p>
+        <div class="flex flex-row">
+            <div class="basis-1/4 m-1">hours</div>
+            <div class="basis-1/4 m-1">summary</div>
+            <div class="basis-1/4 m-1">rain</div>
+            <div class="basis-1/4 m-1">temp</div>
+            <div class="basis-1/4 m-1">wind</div>
+        </div>
+        {{#each this}}
+            {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
+                <div class="flex flex-row items-center">
+                    <div class="basis-1/4 m-1">{{getHours this.time}}</div>
+                    <div class="basis-1/4 m-1"><img class="w-20" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" /></div>
+                    <div class="basis-1/4 m-1">{{this.data.next_1_hours.details.precipitation_amount}}</div>
+                    <div class="basis-1/4 m-1">{{this.data.instant.details.air_temperature}}</div>
+                    <div class="basis-1/4 m-1">{{this.data.instant.details.wind_speed}}</div>
+                </div>
+            {{/if}}
+        {{/each}}
+        </div>
+    {{/each}}
+    </div>
+{{/if}}
