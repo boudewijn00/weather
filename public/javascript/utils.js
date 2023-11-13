@@ -9,6 +9,6 @@ function getIp () {
 function getGeoLocation () {
   navigator.geolocation.getCurrentPosition((position) => {
     const { latitude, longitude } = position.coords
-    window.location.href = '/?lat=' + latitude + '&lon=' + longitude
+    console.log(latitude, longitude)
   })
 }
