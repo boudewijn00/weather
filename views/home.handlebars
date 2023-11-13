@@ -2,13 +2,17 @@
     <div class="bg-gray-100 p-2">
         <div class="flex justify-between items-center">
             {{#if (isNotEmpty last_update)}}
-            <div class="basis-2/5">
+            <div class="basis-1/5">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4">
+                    <a href="/">home</a>
+                </button>
+            </div>
+            <div class="basis-4/5">
                 last update: {{getDate last_update}}/{{getMonth last_update}} {{getHours last_update}}:{{getMinutes last_update}}
                 city: {{city}}
                 ip: {{ip}}
             </div>
             {{/if}}
-            <div class="basis-2/5" id="ipAddress"></div>
         </div>
     </div>
     <div class="container mx-auto text-4xl md:max-w-4xl sm:max-w-full">
