@@ -17,26 +17,41 @@ require('dotenv').config();
 
 app.get('/', (req, res) => {
     const ip = req.query.ip;
+    const lat = req.query.lat;
+    const lon = req.query.lon;
 
-    if(!ip) {
-        res.render('home', {
-            dates: [],
-            last_update: null
+    if (lat && lon) {
+        getWeather(lat, lon).then((data) => {
+            res.render('home', {
+                ip: null,
+                dates: groupTimeseries(data),
+                last_update: new Date(data.data.properties.meta.updated_at),
+                city: null
+            });
+        });
+
+        return;
+    } else if(ip) {
+        getLocation(ip).then((data) => {
+            const city = data.city;
+            getWeather(data.latitude, data.longitude).then((data) => {
+                res.render('home', {
+                    ip: ip,
+                    dates: groupTimeseries(data),
+                    last_update: new Date(data.data.properties.meta.updated_at),
+                    city: city
+                });
+            });
         });
 
         return;
     }
 
-    const location = getLocation(ip).then((data) => {
-        const city = data.city;
-        getWeather(data.latitude, data.longitude).then((data) => {
-            res.render('home', {
-                ip: ip,
-                dates: groupTimeseries(data),
-                last_update: new Date(data.data.properties.meta.updated_at),
-                city: city
-            });
-        });
+    res.render('home', {
+        ip: null,
+        dates: [],
+        last_update: null,
+        city: null
     });
 });
 
