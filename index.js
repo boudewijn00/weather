@@ -60,7 +60,7 @@ app.listen(port, () => {
 });
 
 const getLocation = async(ip) => {
-    const key = 'e0f69c584aa94229b513cbfcb4fd892c'
+    const key = process.env.ABSTRACT_API_KEY;
     
     let config = {
         method: 'get',
