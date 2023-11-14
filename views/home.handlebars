@@ -10,7 +10,6 @@
             <div class="basis-4/5">
                 last update: {{getDate last_update}}/{{getMonth last_update}} {{getHours last_update}}:{{getMinutes last_update}}
                 city: {{city}}
-                ip: {{ip}}
             </div>
             {{/if}}
         </div>
@@ -42,10 +41,10 @@
     </div>
 {{else}}
     <div class="flex justify-center p-10">
-        <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-4" onclick="getIp()">
+        <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-4" onclick="getIpAndRedirect()">
             Get weather by ip
         </button>
-        <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-4" onclick="getGeoLocation()">
+        <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-4" onclick="getCoordsAndRedirect()">
             Get weather by gps
         </button>
     </div>

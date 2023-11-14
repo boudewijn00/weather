@@ -21,22 +21,23 @@ app.get('/', (req, res) => {
     const lon = req.query.lon;
 
     if (lat && lon) {
-        getWeather(lat, lon).then((data) => {
-            res.render('home', {
-                ip: null,
-                dates: groupTimeseries(data),
-                last_update: new Date(data.data.properties.meta.updated_at),
-                city: null
+        getLocationByCoords(lat, lon).then((data) => {
+            const city = data.city;
+            getWeather(lat, lon).then((data) => {
+                res.render('home', {
+                    dates: groupTimeseries(data),
+                    last_update: new Date(data.data.properties.meta.updated_at),
+                    city: city
+                });
             });
         });
 
         return;
     } else if(ip) {
-        getLocation(ip).then((data) => {
+        getLocationByIp(ip).then((data) => {
             const city = data.city;
             getWeather(data.latitude, data.longitude).then((data) => {
                 res.render('home', {
-                    ip: ip,
                     dates: groupTimeseries(data),
                     last_update: new Date(data.data.properties.meta.updated_at),
                     city: city
@@ -59,13 +60,13 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
 
-const getLocation = async(ip) => {
+const getLocationByIp = async(ip) => {
     const key = process.env.ABSTRACT_API_KEY;
     
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://ipgeolocation.abstractapi.com/v1?api_key='+key+'&ip_address=82.169.46.119',
+        url: 'https://ipgeolocation.abstractapi.com/v1?api_key='+key+'&ip_address='+ip,
         headers: { }
       };
       
@@ -73,6 +74,22 @@ const getLocation = async(ip) => {
 
     return response.data;
 }
+
+const getLocationByCoords = async(latitude, longitude) => {
+    const key = process.env.GEO_COD_API_KEY;
+    
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'https://geocod.xyz/api/public/getAddress?apikey='+key+'&lat='+latitude+'&lon='+longitude,
+        headers: { }
+      };
+      
+    const response = await axios.request(config);
+
+    return response.data;
+}
+
 
 const getWeather = async(latitude, longitude) => {
     let config = {
