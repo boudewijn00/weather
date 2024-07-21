@@ -10,6 +10,8 @@
             <div class="basis-4/5">
                 last update: {{getDate last_update}}/{{getMonth last_update}} {{getHours last_update}}:{{getMinutes last_update}}
                 city: {{city}}
+                lat: {{lat}}
+                lon: {{lon}}
             </div>
             {{/if}}
         </div>
@@ -40,12 +42,24 @@
     {{/each}}
     </div>
 {{else}}
-    <div class="flex justify-center p-10">
-        <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-4" onclick="getIpAndRedirect()">
-            Get weather by ip
-        </button>
-        <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-4" onclick="getCoordsAndRedirect()">
-            Get weather by gps
-        </button>
+    <div class="flex items-center justify-center bg-gray-100">
+        <div>
+            <div class="mt-5 flex justify-center">
+                <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-2" onclick="getIpAndRedirect()">
+                    Get weather by ip
+                </button>
+                <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-2" onclick="getCoordsAndRedirect()">
+                    Get weather by gps
+                </button>
+            </div>
+            <div class="mt-5 mb-2 px-2">
+                <input id="city" type="text" class="w-full px-4 py-2 border rounded" placeholder="Type City" />
+            </div>
+            <div class="mb-5 px-2">
+                <button class="w-full bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onClick="redirectByCityName()">
+                    Submit
+                </button>
+            </div>
+        </div>
     </div>
 {{/if}}

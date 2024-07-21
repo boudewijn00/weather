@@ -19,16 +19,19 @@ app.get('/', (req, res) => {
     const ip = req.query.ip;
     const lat = req.query.lat;
     const lon = req.query.lon;
+    const city = req.query.city;
 
     if (lat && lon) {
         getLocationByCoords(lat, lon).then((data) => {
             const city = data.name;
-            console.log(data);
+
             getWeather(lat, lon).then((data) => {
                 res.render('home', {
                     dates: groupTimeseries(data),
                     last_update: new Date(data.data.properties.meta.updated_at),
-                    city: city
+                    city: city,
+                    lat: lat,
+                    lon: lon
                 });
             });
         });
@@ -37,11 +40,31 @@ app.get('/', (req, res) => {
     } else if(ip) {
         getLocationByIp(ip).then((data) => {
             const city = data.city;
-            getWeather(data.latitude, data.longitude).then((data) => {
+            const lat = data.latitude;
+            const lon = data.longitude;
+            getWeather(lat, lon).then((data) => {
                 res.render('home', {
                     dates: groupTimeseries(data),
                     last_update: new Date(data.data.properties.meta.updated_at),
-                    city: city
+                    city: city,
+                    lat: lat,
+                    lon: lon
+                });
+            });
+        });
+
+        return;
+    } else if(city) {
+        getCoordsByCity(city).then((data) => {
+            const lon = data.lon;
+            const lat = data.lat;
+            getWeather(lat, lon).then((data) => {
+                res.render('home', {
+                    dates: groupTimeseries(data),
+                    last_update: new Date(data.data.properties.meta.updated_at),
+                    city: city,
+                    lat: lat,
+                    lon: lon
                 });
             });
         });
@@ -49,11 +72,14 @@ app.get('/', (req, res) => {
         return;
     }
 
+
     res.render('home', {
         ip: null,
         dates: [],
         last_update: null,
-        city: null
+        city: null,
+        lat: null,
+        lon: null
     });
 });
 
@@ -83,6 +109,21 @@ const getLocationByCoords = async(latitude, longitude) => {
         method: 'get',
         maxBodyLength: Infinity,
         url: 'https://api.openweathermap.org/geo/1.0/reverse?appid='+key+'&lat='+latitude+'&lon='+longitude,
+        headers: { }
+      };
+      
+    const response = await axios.request(config);
+
+    return response.data[0];
+}
+
+const getCoordsByCity = async(city) => {
+    const key = process.env.OPEN_WEATHER_API_KEY;
+    
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'https://api.openweathermap.org/geo/1.0/direct?q='+city+'&appid='+key,
         headers: { }
       };
       

@@ -8,8 +8,12 @@ function getIpAndRedirect () {
 
 function getCoordsAndRedirect () {
   navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position.coords)
     const { latitude, longitude } = position.coords
     window.location.href = '/?lat=' + latitude + '&lon=' + longitude
   })
+}
+
+function redirectByCityName () {
+  const city = document.getElementById('city').value
+  window.location.href = '/?city=' + city
 }
