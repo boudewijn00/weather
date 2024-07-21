@@ -22,7 +22,8 @@ app.get('/', (req, res) => {
 
     if (lat && lon) {
         getLocationByCoords(lat, lon).then((data) => {
-            const city = data.city;
+            const city = data.name;
+            console.log(data);
             getWeather(lat, lon).then((data) => {
                 res.render('home', {
                     dates: groupTimeseries(data),
@@ -76,18 +77,18 @@ const getLocationByIp = async(ip) => {
 }
 
 const getLocationByCoords = async(latitude, longitude) => {
-    const key = process.env.GEO_COD_API_KEY;
+    const key = process.env.OPEN_WEATHER_API_KEY;
     
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://geocod.xyz/api/public/getAddress?apikey='+key+'&lat='+latitude+'&lon='+longitude,
+        url: 'https://api.openweathermap.org/geo/1.0/reverse?appid='+key+'&lat='+latitude+'&lon='+longitude,
         headers: { }
       };
       
     const response = await axios.request(config);
 
-    return response.data;
+    return response.data[0];
 }
 
 
