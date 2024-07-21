@@ -37,5 +37,8 @@ module.exports = {
     },
     consoleLog: function (value) {
         console.log(value);
+    },
+    formatFloat: function (value) {
+        return parseFloat(value).toFixed(2);
     }
 }
