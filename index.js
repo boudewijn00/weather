@@ -16,35 +16,18 @@ app.use(express.static('public'));
 require('dotenv').config();
 
 app.get('/', (req, res) => {
-    const ip = req.query.ip;
     const lat = req.query.lat;
     const lon = req.query.lon;
     const city = req.query.city;
 
     if (lat && lon) {
         getLocationByCoords(lat, lon).then((data) => {
-            const city = data.name;
+            const city = data.properties.city;
+            const timezone = data.properties.timezone;
 
-            getWeather(lat, lon).then((data) => {
+            getWeather(lat, lon, timezone).then((data) => {
                 res.render('home', {
-                    dates: groupTimeseries(data),
-                    last_update: new Date(data.data.properties.meta.updated_at),
-                    city: city,
-                    lat: lat,
-                    lon: lon
-                });
-            });
-        });
-
-        return;
-    } else if(ip) {
-        getLocationByIp(ip).then((data) => {
-            const city = data.city;
-            const lat = data.latitude;
-            const lon = data.longitude;
-            getWeather(lat, lon).then((data) => {
-                res.render('home', {
-                    dates: groupTimeseries(data),
+                    dates: groupTimeseries(data, timezone),
                     last_update: new Date(data.data.properties.meta.updated_at),
                     city: city,
                     lat: lat,
@@ -56,11 +39,14 @@ app.get('/', (req, res) => {
         return;
     } else if(city) {
         getCoordsByCity(city).then((data) => {
-            const lon = data.lon;
-            const lat = data.lat;
+            const lon = data.properties.lon;
+            const lat = data.properties.lat;
+            const timezone = data.properties.timezone;
+            const city = data.properties.city;
+
             getWeather(lat, lon).then((data) => {
                 res.render('home', {
-                    dates: groupTimeseries(data),
+                    dates: groupTimeseries(data, timezone),
                     last_update: new Date(data.data.properties.meta.updated_at),
                     city: city,
                     lat: lat,
@@ -87,49 +73,34 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
 
-const getLocationByIp = async(ip) => {
-    const key = process.env.ABSTRACT_API_KEY;
-    
-    let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: 'https://ipgeolocation.abstractapi.com/v1?api_key='+key+'&ip_address='+ip,
-        headers: { }
-      };
-      
-    const response = await axios.request(config);
-
-    return response.data;
-}
-
 const getLocationByCoords = async(latitude, longitude) => {
-    const key = process.env.OPEN_WEATHER_API_KEY;
+    const key = process.env.GEOAPIFY_API_KEY;
     
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://api.openweathermap.org/geo/1.0/reverse?appid='+key+'&lat='+latitude+'&lon='+longitude,
+        url: 'https://api.geoapify.com/v1/geocode/reverse/?apiKey='+key+'&lat='+latitude+'&lon='+longitude,
         headers: { }
       };
       
     const response = await axios.request(config);
 
-    return response.data[0];
+    return response.data.features[0];
 }
 
 const getCoordsByCity = async(city) => {
-    const key = process.env.OPEN_WEATHER_API_KEY;
+    const key = process.env.GEOAPIFY_API_KEY;
     
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://api.openweathermap.org/geo/1.0/direct?q='+city+'&appid='+key,
+        url: 'https://api.geoapify.com/v1/geocode/search?text='+city+'&apiKey='+key,
         headers: { }
       };
       
     const response = await axios.request(config);
 
-    return response.data[0];
+    return response.data.features[0];
 }
 
 
@@ -147,7 +118,7 @@ const getWeather = async(latitude, longitude) => {
     return response;
 }
 
-const groupTimeseries = (response) => {
+const groupTimeseries = (response, timezone) => {
     const grouped = response.data.properties.timeseries.reduce((acc, curr) => {
         
         if(!curr.data.next_1_hours) {
@@ -167,6 +138,11 @@ const groupTimeseries = (response) => {
             acc[key] = [];
         }
 
+        curr.time = new Date(curr.time).toLocaleTimeString('en-US', {
+            timeZone: timezone.name,
+            hour: '2-digit', 
+            hour12: false
+        });
         acc[key].push(curr);
 
         return acc;     
