@@ -18,7 +18,7 @@ require('dotenv').config();
 app.get('/', (req, res) => {
     const lat = req.query.lat;
     const lon = req.query.lon;
-    const city = req.query.city;
+    const location = req.query.location;
 
     if (lat && lon) {
         getLocationByCoords(lat, lon).then((data) => {
@@ -39,8 +39,8 @@ app.get('/', (req, res) => {
         });
 
         return;
-    } else if(city) {
-        getCoordsByCity(city).then((data) => {
+    } else if(location) {
+        getCoordsByLocation(location).then((data) => {
             const lon = data.properties.lon;
             const lat = data.properties.lat;
             const timezone = data.properties.timezone;
@@ -92,13 +92,13 @@ const getLocationByCoords = async(latitude, longitude) => {
     return response.data.features[0];
 }
 
-const getCoordsByCity = async(city) => {
+const getCoordsByLocation = async(location) => {
     const key = process.env.GEOAPIFY_API_KEY;
     
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://api.geoapify.com/v1/geocode/search?text='+city+'&apiKey='+key,
+        url: 'https://api.geoapify.com/v1/geocode/search?text='+location+'&apiKey='+key,
         headers: { }
       };
       

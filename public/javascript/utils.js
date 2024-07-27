@@ -13,7 +13,7 @@ function getCoordsAndRedirect () {
   })
 }
 
-function redirectByCityName () {
-  const city = document.getElementById('city').value
-  window.location.href = '/?city=' + city
+function redirectByLocation () {
+  const location = document.getElementById('location').value
+  window.location.href = '/?location=' + location
 }
