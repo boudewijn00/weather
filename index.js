@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
         getLocationByCoords(lat, lon).then((data) => {
             const city = data.properties.city;
             const timezone = data.properties.timezone;
+            const countryCode = data.properties.country_code;
 
             getWeather(lat, lon, timezone).then((data) => {
                 res.render('home', {
@@ -31,7 +32,8 @@ app.get('/', (req, res) => {
                     last_update: new Date(data.data.properties.meta.updated_at),
                     city: city,
                     lat: lat,
-                    lon: lon
+                    lon: lon,
+                    countryCode: countryCode
                 });
             });
         });
@@ -43,6 +45,7 @@ app.get('/', (req, res) => {
             const lat = data.properties.lat;
             const timezone = data.properties.timezone;
             const city = data.properties.city;
+            const countryCode = data.properties.country_code;
 
             getWeather(lat, lon).then((data) => {
                 res.render('home', {
@@ -50,7 +53,8 @@ app.get('/', (req, res) => {
                     last_update: new Date(data.data.properties.meta.updated_at),
                     city: city,
                     lat: lat,
-                    lon: lon
+                    lon: lon,
+                    countryCode: countryCode
                 });
             });
         });
