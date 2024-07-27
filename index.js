@@ -138,7 +138,7 @@ const groupTimeseries = (response, timezone) => {
         const time = currentDateTime.toLocaleTimeString('en-US', {
             timeZone: timezone.name,
             hour: '2-digit', 
-            hour12: false
+            hour12: true
         });
         
         if (!acc[key]) {
