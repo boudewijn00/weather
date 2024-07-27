@@ -124,13 +124,22 @@ const groupTimeseries = (response, timezone) => {
         if(!curr.data.next_1_hours) {
             return acc;
         }
-
-        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         
-        curr.time = new Date(curr.time);
-        const month = curr.time.getMonth() + 1;
-        const date = curr.time.getDate();
-        const key = (days[curr.time.getDay()] + ' ' + date + '/' + month);
+        currentDateTime = new Date(curr.time);
+        const key = currentDateTime.toLocaleDateString('en-US', {
+            timeZone: timezone.name,
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour12: true
+        });
+
+        const time = currentDateTime.toLocaleTimeString('en-US', {
+            timeZone: timezone.name,
+            hour: '2-digit', 
+            hour12: false
+        });
         
         if (!acc[key]) {
             delete acc['time'];
@@ -138,11 +147,7 @@ const groupTimeseries = (response, timezone) => {
             acc[key] = [];
         }
 
-        curr.time = new Date(curr.time).toLocaleTimeString('en-US', {
-            timeZone: timezone.name,
-            hour: '2-digit', 
-            hour12: false
-        });
+        curr.time = time;
         acc[key].push(curr);
 
         return acc;     
