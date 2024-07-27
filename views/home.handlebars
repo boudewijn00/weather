@@ -36,6 +36,14 @@
                     <div class="basis-1/4 m-1">{{this.data.instant.details.air_temperature}}</div>
                     <div class="basis-1/4 m-1">{{this.data.instant.details.wind_speed}}</div>
                 </div>
+            {{else}}
+                <div class="flex flex-row items-center">
+                    <div class="basis-1/4 m-1">{{this.time}}</div>
+                    <div class="basis-1/4 m-1"><img class="w-20" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" /></div>
+                    <div class="basis-1/4 m-1">0</div>
+                    <div class="basis-1/4 m-1">{{this.data.instant.details.air_temperature}}</div>
+                    <div class="basis-1/4 m-1">{{this.data.instant.details.wind_speed}}</div>
+                </div>
             {{/if}}
         {{/each}}
         </div>

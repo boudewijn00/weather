@@ -121,7 +121,9 @@ const getWeather = async(latitude, longitude) => {
 const groupTimeseries = (response, timezone) => {
     const grouped = response.data.properties.timeseries.reduce((acc, curr) => {
         
-        if(!curr.data.next_1_hours) {
+        const keys = Object.keys(acc).length;
+
+        if (keys > 6) {
             return acc;
         }
         
