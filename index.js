@@ -132,13 +132,13 @@ const groupTimeseries = (response, timezone) => {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-            hour12: true
+            hour12: false
         });
 
         const time = currentDateTime.toLocaleTimeString('en-US', {
             timeZone: timezone.name,
             hour: '2-digit', 
-            hour12: true
+            hour12: false
         });
         
         if (!acc[key]) {
