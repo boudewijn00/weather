@@ -131,6 +131,48 @@
             </div>
         </div>
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const triggers = document.querySelectorAll('.day-details-trigger');
+
+        // Initially hide content on large screens
+        if (window.matchMedia('(min-width: 1024px)').matches) {
+            triggers.forEach(trigger => {
+                trigger.nextElementSibling.classList.add('hidden');
+            });
+        }
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                if (window.matchMedia('(min-width: 1024px)').matches) {
+                    const content = trigger.nextElementSibling;
+                    const icon = trigger.querySelector('svg');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                }
+            });
+        });
+
+        // On resize, manage visibility
+        window.addEventListener('resize', () => {
+            if (window.matchMedia('(min-width: 1024px)').matches) {
+                // On resize to large screen, hide all details to reset state.
+                triggers.forEach(trigger => {
+                    trigger.nextElementSibling.classList.add('hidden');
+                    const icon = trigger.querySelector('svg');
+                    if (icon) icon.classList.remove('rotate-180');
+                });
+            } else {
+                // On resize to small screen, ensure content is visible
+                triggers.forEach(trigger => {
+                    trigger.nextElementSibling.classList.remove('hidden');
+                    const icon = trigger.querySelector('svg');
+                    if (icon) icon.classList.remove('rotate-180');
+                });
+            }
+        });
+    });
+</script>
 {{else}}
     <div class="flex items-center justify-center h-screen">
         <div class="bg-black/30 backdrop-blur-md p-8 rounded-xl shadow-2xl max-w-sm w-full text-center text-white">
@@ -158,38 +200,4 @@
             </button>
         </div>
     </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const triggers = document.querySelectorAll('.day-details-trigger');
-
-        // Initially hide content on large screens
-        if (window.matchMedia('(min-width: 1024px)').matches) {
-            triggers.forEach(trigger => {
-                trigger.nextElementSibling.classList.add('hidden');
-            });
-        }
-
-        triggers.forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                if (window.matchMedia('(min-width: 1024px)').matches) {
-                    const content = trigger.nextElementSibling;
-                    const icon = trigger.querySelector('svg');
-                    content.classList.toggle('hidden');
-                    icon.classList.toggle('rotate-180');
-                }
-            });
-        });
-
-        // On resize to small screen, ensure content is visible
-        window.addEventListener('resize', () => {
-            if (!window.matchMedia('(min-width: 1024px)').matches) {
-                triggers.forEach(trigger => {
-                    trigger.nextElementSibling.classList.remove('hidden');
-                    const icon = trigger.querySelector('svg');
-                    if (icon) icon.classList.remove('rotate-180');
-                });
-            }
-        });
-    });
-</script>
 {{/if}}
