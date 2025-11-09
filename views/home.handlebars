@@ -1,57 +1,67 @@
 {{#if dates}}
-    <div class="bg-gray-100 p-2">
-        <div class="flex justify-between items-center">
-            {{#if (isNotEmpty last_update)}}
-            <div class="basis-1/5">
-                <button class="bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-4">
-                    <a href="/">home</a>
-                </button>
-            </div>
-            <div class="basis-4/5">
-                last update: {{getDate last_update}}/{{getMonth last_update}} {{getHours last_update}}:{{getMinutes last_update}}
-                city: {{city}}
-                country: {{countryCode}}
-                lat: {{formatFloat lat}}
-                lon: {{formatFloat lon}}
-            </div>
-            {{/if}}
-        </div>
-    </div>
-    <div class="container mx-auto text-4xl md:max-w-4xl sm:max-w-full">
-    {{#each dates}}
-        <div class="m-2 p-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg shadow-lg">
-        <p class="text-4xl font-semibold">{{@key}}</p>
-        <div class="flex flex-row">
-            <div class="basis-1/4 m-1">hours</div>
-            <div class="basis-1/4 m-1">summary</div>
-            <div class="basis-1/4 m-1">rain</div>
-            <div class="basis-1/4 m-1">temp</div>
-            <div class="basis-1/4 m-1">wind</div>
-        </div>
-        {{#each this}}
-            {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
-                <div class="flex flex-row items-center">
-                    <div class="basis-1/4 m-1">{{this.time}}</div>
-                    <div class="basis-1/4 m-1"><img class="w-20" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" /></div>
-                    <div class="basis-1/4 m-1">{{this.data.next_1_hours.details.precipitation_amount}}</div>
-                    <div class="basis-1/4 m-1">{{this.data.instant.details.air_temperature}}</div>
-                    <div class="basis-1/4 m-1">{{this.data.instant.details.wind_speed}}</div>
+    <div class="container mx-auto p-2 sm:p-4">
+        {{#if (isNotEmpty last_update)}}
+        <header class="bg-white/20 backdrop-blur-md rounded-xl p-4 mb-6 shadow-lg text-white">
+            <div class="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+                <div class="mb-3 sm:mb-0">
+                    <h1 class="text-xl md:text-2xl font-bold">{{city}}, {{countryCode}}</h1>
+                    <p class="text-xs md:text-sm text-white/80">
+                        Lat: {{formatFloat lat}}, Lon: {{formatFloat lon}} | Last Update: {{getDate last_update}}/{{getMonth last_update}} {{getHours last_update}}:{{getMinutes last_update}}
+                    </p>
                 </div>
-            {{else}}
-                <div class="flex flex-row items-center">
-                    <div class="basis-1/4 m-1">{{this.time}}</div>
-                    <div class="basis-1/4 m-1"><img class="w-20" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" /></div>
-                    <div class="basis-1/4 m-1">0</div>
-                    <div class="basis-1/4 m-1">{{this.data.instant.details.air_temperature}}</div>
-                    <div class="basis-1/4 m-1">{{this.data.instant.details.wind_speed}}</div>
+                <a href="/" class="bg-white/30 hover:bg-white/50 font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300">
+                    Search Again
+                </a>
+            </div>
+        </header>
+        {{/if}}
+
+        <div class="space-y-6">
+        {{#each dates}}
+            <div class="bg-white/20 backdrop-blur-md rounded-xl shadow-lg overflow-hidden">
+                <h2 class="text-xl md:text-2xl font-bold text-white bg-black/10 px-4 py-3 sm:px-6">{{@key}}</h2>
+                <div class="p-2 md:p-4">
+                    <!-- Header Row -->
+                    <div class="hidden md:flex flex-row text-white/90 font-bold uppercase text-xs px-2 pb-2 border-b border-white/20">
+                        <div class="w-1/5 text-left">Time</div>
+                        <div class="w-1/5 text-center">Forecast</div>
+                        <div class="w-1/5 text-center">Temp.</div>
+                        <div class="w-1/5 text-center">Rain</div>
+                        <div class="w-1/5 text-center">Wind</div>
+                    </div>
+                    <!-- Data Rows -->
+                    <div class="divide-y divide-white/20">
+                    {{#each this}}
+                        <div class="flex flex-col md:flex-row items-center text-white py-3 px-2 hover:bg-black/10 rounded-md transition duration-200">
+                            <div class="w-full md:w-1/5 text-center md:text-left font-bold text-lg md:text-base mb-2 md:mb-0">{{this.time}}</div>
+                            <div class="w-full md:w-1/5 flex justify-center py-2 md:py-0">
+                                {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
+                                    <img class="w-16" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
+                                {{else}}
+                                    <img class="w-16" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" title="{{this.data.next_6_hours.summary.symbol_code}}" />
+                                {{/if}}
+                            </div>
+                            <div class="w-full md:w-1/5 text-center text-lg md:text-base"><span class="md:hidden font-bold text-white/80">Temp: </span>{{this.data.instant.details.air_temperature}}&deg;C</div>
+                            <div class="w-full md:w-1/5 text-center text-lg md:text-base">
+                                <span class="md:hidden font-bold text-white/80">Rain: </span>
+                                {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
+                                    {{this.data.next_1_hours.details.precipitation_amount}}
+                                {{else}}
+                                    0
+                                {{/if}}
+                                <span class="text-white/60 text-sm">mm</span>
+                            </div>
+                            <div class="w-full md:w-1/5 text-center text-lg md:text-base"><span class="md:hidden font-bold text-white/80">Wind: </span>{{this.data.instant.details.wind_speed}} <span class="text-white/60 text-sm">m/s</span></div>
+                        </div>
+                    {{/each}}
+                    </div>
                 </div>
-            {{/if}}
+            </div>
         {{/each}}
         </div>
-    {{/each}}
     </div>
 {{else}}
-    <div class="bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center h-screen">
+    <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
             <h1 class="text-3xl font-bold mb-6 text-gray-800">Weather Forecast</h1>
             
