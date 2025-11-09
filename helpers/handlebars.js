@@ -44,5 +44,11 @@ module.exports = {
     toKmh: function (value) {
         const kmh = parseFloat(value) * 3.6;
         return kmh.toFixed(1);
+    },
+    isLessThan: function (value, limit) {
+        return value < limit;
+    },
+    isGte: function (value, limit) {
+        return value >= limit;
     }
 }
