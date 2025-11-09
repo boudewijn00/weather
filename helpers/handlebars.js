@@ -51,6 +51,17 @@ module.exports = {
     isGte: function (value, limit) {
         return value >= limit;
     },
+    hasHoursToShow: function(hours, dayIndex) {
+        if (!hours || !Array.isArray(hours) || hours.length === 0) {
+            return false;
+        }
+
+        if (dayIndex === 0) {
+            return hours.length > 1;
+        }
+        
+        return true;
+    },
     getFirstHour: function (dates) {
         if (!dates || typeof dates !== 'object' || Object.keys(dates).length === 0) {
             return null;
