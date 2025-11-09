@@ -35,3 +35,5 @@ function initializeDayDetailsToggle () {
     });
   });
 }
+
+document.addEventListener('DOMContentLoaded', initializeDayDetailsToggle);
