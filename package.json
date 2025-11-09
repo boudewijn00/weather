@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"nodemon index.js\" \"npx @tailwindcss/cli -i ./public/css/style.css -o ./public/css/output.css --watch\"",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build:css": "npx @tailwindcss/cli -i ./public/css/style.css -o ./public/css/output.css"
   },
   "author": "",
   "license": "ISC",
