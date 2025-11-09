@@ -32,17 +32,17 @@
                     <!-- Data Rows -->
                     <div class="divide-y divide-white/20">
                     {{#each this}}
-                        <div class="flex flex-col md:flex-row items-center text-white py-3 px-2 hover:bg-black/20 rounded-md transition duration-200">
-                            <div class="w-full md:w-1/5 text-center md:text-left font-bold text-lg md:text-base mb-2 md:mb-0">{{this.time}}</div>
-                            <div class="w-full md:w-1/5 flex justify-center py-2 md:py-0">
+                        <div class="flex flex-row items-center text-white py-3 px-2 hover:bg-black/20 rounded-md transition duration-200 text-sm md:text-base">
+                            <div class="w-1/5 text-left font-bold">{{this.time}}:00</div>
+                            <div class="w-1/5 flex justify-center">
                                 {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
-                                    <img class="w-16" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
+                                    <img class="w-12 md:w-16" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
                                 {{else}}
-                                    <img class="w-16" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" title="{{this.data.next_6_hours.summary.symbol_code}}" />
+                                    <img class="w-12 md:w-16" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" title="{{this.data.next_6_hours.summary.symbol_code}}" />
                                 {{/if}}
                             </div>
-                            <div class="w-full md:w-1/5 text-center text-lg md:text-base"><span class="md:hidden font-bold text-white/80">Temp: </span>{{this.data.instant.details.air_temperature}}&deg;C</div>
-                            <div class="w-full md:w-1/5 text-center text-lg md:text-base">
+                            <div class="w-1/5 text-center"><span class="md:hidden font-bold text-white/80">Temp: </span>{{this.data.instant.details.air_temperature}}&deg;C</div>
+                            <div class="w-1/5 text-center">
                                 <span class="md:hidden font-bold text-white/80">Rain: </span>
                                 {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
                                     {{this.data.next_1_hours.details.precipitation_amount}}
@@ -51,7 +51,7 @@
                                 {{/if}}
                                 <span class="text-white/60 text-sm">mm</span>
                             </div>
-                            <div class="w-full md:w-1/5 text-center text-lg md:text-base"><span class="md:hidden font-bold text-white/80">Wind: </span>{{toKmh this.data.instant.details.wind_speed}} <span class="text-white/60 text-sm">km/h</span></div>
+                            <div class="w-1/5 text-center"><span class="md:hidden font-bold text-white/80">Wind: </span>{{toKmh this.data.instant.details.wind_speed}} <span class="text-white/60 text-sm">km/h</span></div>
                         </div>
                     {{/each}}
                     </div>
