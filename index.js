@@ -3,9 +3,11 @@ const app = express();
 const port = 3000;
 const axios = require('axios');
 const handlebars = require('express-handlebars');
+const path = require('path');
 
 app.engine('handlebars', handlebars.engine({
-    helpers: require('./helpers/handlebars.js')
+    helpers: require('./helpers/handlebars.js'),
+    partialsDir: path.join(__dirname, 'views/partials')
 }));
 
 app.set('view engine', 'handlebars');
