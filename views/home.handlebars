@@ -51,21 +51,30 @@
     {{/each}}
     </div>
 {{else}}
-    <div class="flex items-center justify-center bg-gray-100">
-        <div class="w-screen">
-            <div class="mt-5 flex justify-center">
-                <button class="text-2xl lg:text-lg lg:w-96 w-full bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded m-2" onclick="getCoordsAndRedirect()">
-                    Get weather by gps
+    <div class="landing-container flex items-center justify-center h-screen">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
+            <h1 class="text-3xl font-bold mb-6 text-gray-800">Weather Forecast</h1>
+            
+            <div class="mb-4">
+                <input id="location" type="text" class="text-lg w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter a city or address" />
+            </div>
+            
+            <div class="mb-4">
+                <button class="text-lg w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-300" onClick="redirectByLocation()">
+                    Get Weather
                 </button>
             </div>
-            <div class="mt-5 flex justify-center">
-                <input id="location" type="text" class="text-2xl lg:text-lg lg:w-96 w-full px-4 py-2 border rounded m-2 text-center" placeholder="Type location" />
+
+            <div class="flex items-center my-6">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="flex-shrink mx-4 text-gray-500">or</span>
+                <div class="flex-grow border-t border-gray-300"></div>
             </div>
-            <div class="mb-5 flex justify-center">
-                <button class="text-2xl lg:text-lg lg:w-96 w-full bg-cyan-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded" onClick="redirectByLocation()">
-                    Submit
-                </button>
-            </div>
+
+            <button class="text-lg w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 flex items-center justify-center" onclick="getCoordsAndRedirect()">
+                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Use my current location
+            </button>
         </div>
     </div>
 {{/if}}
