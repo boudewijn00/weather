@@ -1,0 +1,55 @@
+{{#if (isLessThan @index 2)}}
+{{#if (hasHoursToShow this @index)}}
+<div class="bg-black/10 backdrop-blur-md rounded-lg shadow-lg overflow-hidden">
+    <h2 class="text-xl lg:text-2xl font-bold text-gray-900 bg-black/5 px-4 py-3 sm:px-6">{{@key}}</h2>
+    <div class="p-2 lg:p-4">
+        <!-- Header Row -->
+        <div class="hidden lg:flex flex-row text-gray-700 font-bold uppercase text-xs px-2 pb-2 border-b border-gray-200">
+            <div class="w-1/5 text-left">Time</div>
+            <div class="w-1/5 text-center">Forecast</div>
+            <div class="w-1/5 text-center">Temp.</div>
+            <div class="w-1/5 text-center">Rain</div>
+            <div class="w-1/5 text-center">Wind</div>
+        </div>
+        <!-- Data Rows -->
+        <div class="divide-y divide-gray-200">
+        {{#each this}}
+            {{#if (isNotFirstHourOfFirstDay @../index @index)}}
+            <div class="flex flex-row items-center text-gray-800 py-3 px-2 hover:bg-black/10 rounded transition duration-200 text-sm lg:text-base">
+                <div class="w-1/5 text-left font-bold">{{this.time}}:00</div>
+                <div class="w-1/5 flex justify-center">
+                    {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
+                        <img class="w-12 lg:w-16" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
+                    {{else}}
+                        <img class="w-12 lg:w-16" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" title="{{this.data.next_6_hours.summary.symbol_code}}" />
+                    {{/if}}
+                </div>
+                <div class="w-1/5 text-center">
+                    <div class="lg:hidden font-bold text-gray-600">Temp:</div>
+                    <div>{{this.data.instant.details.air_temperature}}&deg;C</div>
+                </div>
+                <div class="w-1/5 text-center">
+                    <div class="lg:hidden font-bold text-gray-600">Rain:</div>
+                    <div>
+                        {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
+                            {{this.data.next_1_hours.details.precipitation_amount}}
+                        {{else}}
+                            0
+                        {{/if}}
+                        <span class="text-gray-500 text-sm">mm</span>
+                    </div>
+                </div>
+                <div class="w-1/5 text-center">
+                    <div class="lg:hidden font-bold text-gray-600">Wind:</div>
+                    <div>
+                        {{toKmh this.data.instant.details.wind_speed}} <span class="text-gray-500 text-sm">km/h</span>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        {{/each}}
+        </div>
+    </div>
+</div>
+{{/if}}
+{{/if}}
