@@ -41,7 +41,10 @@
                                     <img class="w-12 md:w-16" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" title="{{this.data.next_6_hours.summary.symbol_code}}" />
                                 {{/if}}
                             </div>
-                            <div class="w-1/5 text-center"><span class="md:hidden font-bold text-white/80">Temp: </span>{{this.data.instant.details.air_temperature}}&deg;C</div>
+                            <div class="w-1/5 text-center">
+                                <div class="md:hidden font-bold text-white/80">Temp:</div>
+                                <div>{{this.data.instant.details.air_temperature}}&deg;C</div>
+                            </div>
                             <div class="w-1/5 text-center">
                                 <div class="md:hidden font-bold text-white/80">Rain:</div>
                                 <div>
