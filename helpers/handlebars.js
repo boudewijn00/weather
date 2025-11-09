@@ -50,5 +50,18 @@ module.exports = {
     },
     isGte: function (value, limit) {
         return value >= limit;
+    },
+    getFirstHour: function (dates) {
+        if (!dates || typeof dates !== 'object' || Object.keys(dates).length === 0) {
+            return null;
+        }
+        const firstDayKey = Object.keys(dates)[0];
+        if (dates[firstDayKey] && dates[firstDayKey].length > 0) {
+            return dates[firstDayKey][0];
+        }
+        return null;
+    },
+    isNotFirstHourOfFirstDay: function (dayIndex, hourIndex) {
+        return dayIndex !== 0 || hourIndex !== 0;
     }
 }
