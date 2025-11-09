@@ -149,21 +149,7 @@
     </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const triggers = document.querySelectorAll('.day-details-trigger');
-
-        // Initially hide content
-        triggers.forEach(trigger => {
-            trigger.nextElementSibling.classList.add('hidden');
-        });
-
-        triggers.forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                const content = trigger.nextElementSibling;
-                const icon = trigger.querySelector('svg');
-                content.classList.toggle('hidden');
-                icon.classList.toggle('rotate-180');
-            });
-        });
+        initializeDayDetailsToggle();
     });
 </script>
 {{else}}
