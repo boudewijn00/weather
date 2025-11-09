@@ -83,7 +83,10 @@
             {{#each dates}}
                 {{#if (isGte @index 2)}}
                 <div class="bg-black/30 backdrop-blur-md rounded-xl shadow-lg overflow-hidden">
-                    <h2 class="text-xl lg:text-lg font-bold text-white bg-black/20 px-4 py-3">{{@key}}</h2>
+                    <div class="day-details-trigger flex justify-between items-center bg-black/20 px-4 py-3 lg:cursor-pointer">
+                        <h2 class="text-xl lg:text-lg font-bold text-white">{{@key}}</h2>
+                        <svg class="hidden lg:block w-5 h-5 text-white transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
                     <div class="p-2">
                         <!-- Data Rows -->
                         <div class="divide-y divide-white/20">
@@ -155,4 +158,38 @@
             </button>
         </div>
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const triggers = document.querySelectorAll('.day-details-trigger');
+
+        // Initially hide content on large screens
+        if (window.matchMedia('(min-width: 1024px)').matches) {
+            triggers.forEach(trigger => {
+                trigger.nextElementSibling.classList.add('hidden');
+            });
+        }
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                if (window.matchMedia('(min-width: 1024px)').matches) {
+                    const content = trigger.nextElementSibling;
+                    const icon = trigger.querySelector('svg');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                }
+            });
+        });
+
+        // On resize to small screen, ensure content is visible
+        window.addEventListener('resize', () => {
+            if (!window.matchMedia('(min-width: 1024px)').matches) {
+                triggers.forEach(trigger => {
+                    trigger.nextElementSibling.classList.remove('hidden');
+                    const icon = trigger.querySelector('svg');
+                    if (icon) icon.classList.remove('rotate-180');
+                });
+            }
+        });
+    });
+</script>
 {{/if}}
