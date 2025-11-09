@@ -53,7 +53,12 @@
                                     <span class="text-white/60 text-sm">mm</span>
                                 </div>
                             </div>
-                            <div class="w-1/5 text-center"><span class="md:hidden font-bold text-white/80">Wind: </span>{{toKmh this.data.instant.details.wind_speed}} <span class="text-white/60 text-sm">km/h</span></div>
+                            <div class="w-1/5 text-center">
+                                <div class="md:hidden font-bold text-white/80">Wind:</div>
+                                <div>
+                                    {{toKmh this.data.instant.details.wind_speed}} <span class="text-white/60 text-sm">km/h</span>
+                                </div>
+                            </div>
                         </div>
                     {{/each}}
                     </div>
