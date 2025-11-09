@@ -43,13 +43,15 @@
                             </div>
                             <div class="w-1/5 text-center"><span class="md:hidden font-bold text-white/80">Temp: </span>{{this.data.instant.details.air_temperature}}&deg;C</div>
                             <div class="w-1/5 text-center">
-                                <span class="md:hidden font-bold text-white/80">Rain: </span>
-                                {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
-                                    {{this.data.next_1_hours.details.precipitation_amount}}
-                                {{else}}
-                                    0
-                                {{/if}}
-                                <span class="text-white/60 text-sm">mm</span>
+                                <div class="md:hidden font-bold text-white/80">Rain:</div>
+                                <div>
+                                    {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
+                                        {{this.data.next_1_hours.details.precipitation_amount}}
+                                    {{else}}
+                                        0
+                                    {{/if}}
+                                    <span class="text-white/60 text-sm">mm</span>
+                                </div>
                             </div>
                             <div class="w-1/5 text-center"><span class="md:hidden font-bold text-white/80">Wind: </span>{{toKmh this.data.instant.details.wind_speed}} <span class="text-white/60 text-sm">km/h</span></div>
                         </div>
