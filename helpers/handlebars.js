@@ -40,5 +40,9 @@ module.exports = {
     },
     formatFloat: function (value) {
         return parseFloat(value).toFixed(2);
+    },
+    toKmh: function (value) {
+        const kmh = parseFloat(value) * 3.6;
+        return kmh.toFixed(1);
     }
 }
