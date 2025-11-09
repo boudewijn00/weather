@@ -44,5 +44,35 @@ module.exports = {
     toKmh: function (value) {
         const kmh = parseFloat(value) * 3.6;
         return kmh.toFixed(1);
+    },
+    isLessThan: function (value, limit) {
+        return value < limit;
+    },
+    isGte: function (value, limit) {
+        return value >= limit;
+    },
+    hasHoursToShow: function(hours, dayIndex) {
+        if (!hours || !Array.isArray(hours) || hours.length === 0) {
+            return false;
+        }
+
+        if (dayIndex === 0) {
+            return hours.length > 1;
+        }
+        
+        return true;
+    },
+    getFirstHour: function (dates) {
+        if (!dates || typeof dates !== 'object' || Object.keys(dates).length === 0) {
+            return null;
+        }
+        const firstDayKey = Object.keys(dates)[0];
+        if (dates[firstDayKey] && dates[firstDayKey].length > 0) {
+            return dates[firstDayKey][0];
+        }
+        return null;
+    },
+    isNotFirstHourOfFirstDay: function (dayIndex, hourIndex) {
+        return dayIndex !== 0 || hourIndex !== 0;
     }
 }
