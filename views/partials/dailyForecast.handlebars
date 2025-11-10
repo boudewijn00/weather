@@ -7,7 +7,7 @@
                 {{> currentWeather}}
             {{/with}}
         </div>
-        <h2 class="hidden lg:block text-xl lg:text-2xl font-bold bg-black/5 px-4 py-3 sm:px-6">{{@key}}</h2>
+        <h2 class="hidden lg:block text-xl lg:text-2xl font-bold bg-black/5 px-4 py-3 sm:px-6">{{removeYear @key}}</h2>
     {{else}}
         <h2 class="text-xl lg:text-2xl font-bold bg-black/5 px-4 py-3 sm:px-6">{{removeYear @key}}</h2>
     {{/if}}
