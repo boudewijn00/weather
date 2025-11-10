@@ -21,10 +21,10 @@ module.exports = {
         return false;
     },
     getHours: function (value) {
-        return new Date().getHours();
+        return new Date(value).getHours();
     },
     getDate: function (value) {
-        return new Date().getDate();
+        return new Date(value).getDate();
     },
     getDay: function (value) {
         return new Date(value).getDay();
@@ -33,18 +33,18 @@ module.exports = {
         return new Date(value).getMonth() + 1;
     },
     getMinutes: function (value) {
-        const date = new Date();
+        const date = new Date(value);
         const minutes = date.getMinutes();
         return minutes < 10 ? '0' + minutes : minutes;
     },
     getDayName: function(value) {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const dayIndex = new Date().getDay();
+        const dayIndex = new Date(value).getDay();
         return days[dayIndex];
     },
     getMonthName: function(value) {
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        const monthIndex = new Date().getMonth();
+        const monthIndex = new Date(value).getMonth();
         return months[monthIndex];
     },
     removeYear: function(dateString) {
