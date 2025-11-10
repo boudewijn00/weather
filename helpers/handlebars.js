@@ -38,12 +38,12 @@ module.exports = {
         return minutes < 10 ? '0' + minutes : minutes;
     },
     getDayName: function(value) {
-        const days = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'];
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const dayIndex = new Date().getDay();
         return days[dayIndex];
     },
     getMonthName: function(value) {
-        const months = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'];
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const monthIndex = new Date().getMonth();
         return months[monthIndex];
     },
