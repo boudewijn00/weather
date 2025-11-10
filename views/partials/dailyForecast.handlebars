@@ -25,19 +25,19 @@
         {{#each this}}
             {{#if (isNotFirstHourOfFirstDay @../index @index)}}
             <div class="flex flex-row items-center py-3 px-2 hover:bg-black/10 rounded transition duration-200 text-sm lg:text-base">
-                <div class="w-1/5 text-left font-bold">{{this.time}}:00</div>
-                <div class="w-1/5 flex justify-center">
+                <div class="w-1/6 lg:w-1/5 text-left font-bold">{{this.time}}:00</div>
+                <div class="w-1/6 md:w-1/12 lg:w-1/5 flex justify-center">
                     {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
                         <img class="w-12 lg:w-16" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
                     {{else}}
                         <img class="w-12 lg:w-16" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" title="{{this.data.next_6_hours.summary.symbol_code}}" />
                     {{/if}}
                 </div>
-                <div class="w-1/5 text-center">
+                <div class="w-1/6 lg:w-1/5 text-center">
                     <div class="lg:hidden font-bold">Temp:</div>
                     <div>{{this.data.instant.details.air_temperature}}&deg;C</div>
                 </div>
-                <div class="w-1/5 text-center">
+                <div class="w-1/4 lg:w-1/5 text-center">
                     <div class="lg:hidden font-bold">Rain:</div>
                     <div>
                         {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
@@ -48,7 +48,7 @@
                         <span class="text-sm">mm</span>
                     </div>
                 </div>
-                <div class="w-1/5 text-center">
+                <div class="w-1/4 md:w-1/3 lg:w-1/5 text-center">
                     <div class="lg:hidden font-bold">Wind:</div>
                     <div>
                         {{toKmh this.data.instant.details.wind_speed}} <span class="text-sm">km/h</span>
