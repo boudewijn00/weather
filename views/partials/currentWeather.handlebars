@@ -1,7 +1,7 @@
 <div class="bg-[#2B4162] backdrop-blur-md rounded-md shadow-sm overflow-hidden text-[#F5F0F6]">
-    <h2 class="lg:hidden text-xl font-bold px-4 py-3 sm:px-6">{{getCurrentDayName}} {{getCurrentHours}}:{{getCurrentMinutes}}, {{getCurrentMonthName}} {{getCurrentDate}}</h2>
-    <h2 class="hidden lg:block text-2xl font-bold px-4 py-3 sm:px-6">{{getCurrentHours}}:{{getCurrentMinutes}}</h2>
-    <div class="px-4 pb-4 flex items-center justify-start space-x-4">
+    <h2 class="lg:hidden text-xl font-bold px-4 py-3 sm:px-6">{{getCurrentDayName}}, {{getCurrentMonthName}} {{getCurrentDate}}</h2>
+    <div class="px-4 pb-4">
+        <div class="flex items-center justify-start lg:justify-center space-x-4">
         <div>
             {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
                 <img class="w-24 h-24" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
@@ -12,8 +12,9 @@
         <div>
             <div class="text-5xl font-bold">{{this.data.instant.details.air_temperature}}&deg;C</div>
         </div>
-        <div>
-            <div class="space-y-1">
+        </div>
+        <div class="pt-4">
+            <div class="flex justify-start lg:justify-center space-x-4">
                 <div class="flex items-center">
                     <span class="font-semibold w-12">Rain:</span>
                     <span>

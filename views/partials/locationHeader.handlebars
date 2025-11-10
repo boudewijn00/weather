@@ -1,12 +1,12 @@
-<header class="w-full bg-[#BBE6E4] p-4 mb-6 shadow-sm text-[#2B4162]">
-    <div class="w-full flex flex-row justify-between items-center text-left">
+<header class="w-full bg-[#BBE6E4] mb-6 shadow-sm text-[#2B4162]">
+    <div class="container mx-auto p-4 flex flex-row justify-between items-center text-left">
         <div>
             <h1 class="text-xl md:text-2xl font-bold">{{city}}, {{countryCode}}</h1>
             <p class="text-xs md:text-sm">
-                Last update: {{getHours last_update}}:{{getMinutes last_update}}
+                Last weather data update: {{getHours last_update}}:{{getMinutes last_update}}
             </p>
         </div>
-        <a href="/" class="bg-[#385F71]/90 hover:bg-[#2E4E5E] text-gray-100 font-semibold py-2 px-4 rounded-md shadow-md transition duration-300">
+        <a href="/" class="bg-[#2B4162] hover:bg-[#2E4E5E] text-gray-100 font-semibold py-2 px-4 rounded-md shadow-md transition duration-300">
             Search Again
         </a>
     </div>
