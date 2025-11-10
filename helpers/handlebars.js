@@ -21,19 +21,60 @@ module.exports = {
         return false;
     },
     getHours: function (value) {
-        return value.getHours();
+        return new Date(value).getHours();
     },
     getDate: function (value) {
-        return value.getDate();
+        return new Date(value).getDate();
     },
     getDay: function (value) {
-        return value.getDay();
+        return new Date(value).getDay();
     },
     getMonth: function (value) {
-        return value.getMonth() + 1;
+        return new Date(value).getMonth() + 1;
     },
     getMinutes: function (value) {
-        return value.getMinutes();
+        const date = new Date(value);
+        const minutes = date.getMinutes();
+        return minutes < 10 ? '0' + minutes : minutes;
+    },
+    getCurrentHours: function () {
+        return new Date().getHours();
+    },
+    getCurrentMinutes: function () {
+        const date = new Date();
+        const minutes = date.getMinutes();
+        return minutes < 10 ? '0' + minutes : minutes;
+    },
+    getCurrentDate: function () {
+        return new Date().getDate();
+    },
+    getCurrentDayName: function() {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return days[new Date().getDay()];
+    },
+    getCurrentMonthName: function() {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return months[new Date().getMonth()];
+    },
+    getDayName: function(value) {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const dayIndex = new Date(value).getDay();
+        return days[dayIndex];
+    },
+    getMonthName: function(value) {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const monthIndex = new Date(value).getMonth();
+        return months[monthIndex];
+    },
+    removeYear: function(dateString) {
+        if (typeof dateString !== 'string') {
+            return dateString;
+        }
+        const parts = dateString.split(',');
+        if (parts.length > 2) {
+            return parts.slice(0, 2).join(',');
+        }
+        return dateString;
     },
     consoleLog: function (value) {
         console.log(value);

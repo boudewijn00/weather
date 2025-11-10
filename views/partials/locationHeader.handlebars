@@ -1,9 +1,9 @@
-<header class="bg-[#BBE6E4] backdrop-blur-md rounded-lg p-4 mb-6 shadow-lg text-[#2B4162]">
-    <div class="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
-        <div class="mb-3 sm:mb-0">
+<header class="w-full bg-[#BBE6E4] p-4 mb-6 shadow-sm text-[#2B4162]">
+    <div class="w-full flex flex-row justify-between items-center text-left">
+        <div>
             <h1 class="text-xl md:text-2xl font-bold">{{city}}, {{countryCode}}</h1>
             <p class="text-xs md:text-sm">
-                Last Update: {{getDate last_update}}/{{getMonth last_update}} {{getHours last_update}}:{{getMinutes last_update}}
+                Last update: {{getHours last_update}}:{{getMinutes last_update}}
             </p>
         </div>
         <a href="/" class="bg-[#385F71]/90 hover:bg-[#2E4E5E] text-gray-100 font-semibold py-2 px-4 rounded-md shadow-md transition duration-300">
