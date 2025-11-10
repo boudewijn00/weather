@@ -21,7 +21,7 @@ module.exports = {
         return false;
     },
     getHours: function (value) {
-        return new Date(value).getHours();
+        return new Date().getHours();
     },
     getDate: function (value) {
         return new Date(value).getDate();
@@ -33,7 +33,7 @@ module.exports = {
         return new Date(value).getMonth() + 1;
     },
     getMinutes: function (value) {
-        const date = new Date(value);
+        const date = new Date();
         const minutes = date.getMinutes();
         return minutes < 10 ? '0' + minutes : minutes;
     },
