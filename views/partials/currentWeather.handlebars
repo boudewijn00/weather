@@ -1,6 +1,6 @@
 <div class="bg-[#2B4162] backdrop-blur-md rounded-lg shadow-lg overflow-hidden text-[#F5F0F6]">
-    <h2 class="lg:hidden text-xl font-bold px-4 py-3 sm:px-6">{{getDayName time}} {{getHours time}}:{{getMinutes time}}, {{getMonthName time}} {{getDate time}}</h2>
-    <h2 class="hidden lg:block text-2xl font-bold px-4 py-3 sm:px-6">{{getHours time}}:{{getMinutes time}}</h2>
+    <h2 class="lg:hidden text-xl font-bold px-4 py-3 sm:px-6">{{getCurrentDayName}} {{getCurrentHours}}:{{getCurrentMinutes}}, {{getCurrentMonthName}} {{getCurrentDate}}</h2>
+    <h2 class="hidden lg:block text-2xl font-bold px-4 py-3 sm:px-6">{{getCurrentHours}}:{{getCurrentMinutes}}</h2>
     <div class="px-4 pb-4 flex items-center justify-start space-x-6">
         <div>
             {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}

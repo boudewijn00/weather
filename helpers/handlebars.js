@@ -37,6 +37,25 @@ module.exports = {
         const minutes = date.getMinutes();
         return minutes < 10 ? '0' + minutes : minutes;
     },
+    getCurrentHours: function () {
+        return new Date().getHours();
+    },
+    getCurrentMinutes: function () {
+        const date = new Date();
+        const minutes = date.getMinutes();
+        return minutes < 10 ? '0' + minutes : minutes;
+    },
+    getCurrentDate: function () {
+        return new Date().getDate();
+    },
+    getCurrentDayName: function() {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return days[new Date().getDay()];
+    },
+    getCurrentMonthName: function() {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return months[new Date().getMonth()];
+    },
     getDayName: function(value) {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const dayIndex = new Date(value).getDay();
