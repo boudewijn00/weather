@@ -1,7 +1,11 @@
 {{#if (isLessThan @index 2)}}
 {{#if (hasHoursToShow this @index)}}
 <div class="bg-[#385F71]/70 backdrop-blur-md rounded-md shadow-md overflow-hidden text-gray-100">
-    <h2 class="text-xl lg:text-2xl font-bold bg-black/5 px-4 py-3 sm:px-6">{{@key}}</h2>
+    {{#if (isLessThan @index 1)}}
+        <h2 class="hidden lg:block text-xl lg:text-2xl font-bold bg-black/5 px-4 py-3 sm:px-6">{{@key}}</h2>
+    {{else}}
+        <h2 class="text-xl lg:text-2xl font-bold bg-black/5 px-4 py-3 sm:px-6">{{@key}}</h2>
+    {{/if}}
     <div class="p-2 lg:p-4">
         <!-- Header Row -->
         <div class="hidden lg:flex flex-row text-gray-100 font-bold uppercase text-xs px-2 pb-2 border-b border-gray-200">
