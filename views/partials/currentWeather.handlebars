@@ -1,16 +1,18 @@
 <div class="bg-[#2B4162] backdrop-blur-md rounded-lg shadow-lg overflow-hidden text-[#F5F0F6]">
     <h2 class="text-xl lg:text-2xl font-bold px-4 py-3 sm:px-6">{{getHours time}}:{{getMinutes time}}</h2>
-    <div class="p-4 flex items-center justify-start">
-        <div class="flex">
+    <div class="p-4 flex items-center justify-around">
+        <div>
             {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
                 <img class="w-24 h-24" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
             {{else}}
                 <img class="w-24 h-24" src="/icons/{{this.data.next_6_hours.summary.symbol_code}}.png" title="{{this.data.next_6_hours.summary.symbol_code}}" />
             {{/if}}
         </div>
-        <div class="pl-4">
+        <div>
             <div class="text-5xl font-bold">{{this.data.instant.details.air_temperature}}&deg;C</div>
-            <div class="mt-2 space-y-1">
+        </div>
+        <div>
+            <div class="space-y-1">
                 <div class="flex items-center">
                     <span class="font-semibold w-16">Rain:</span>
                     <span>
