@@ -21,19 +21,21 @@ module.exports = {
         return false;
     },
     getHours: function (value) {
-        return value.getHours();
+        return new Date(value).getHours();
     },
     getDate: function (value) {
-        return value.getDate();
+        return new Date(value).getDate();
     },
     getDay: function (value) {
-        return value.getDay();
+        return new Date(value).getDay();
     },
     getMonth: function (value) {
-        return value.getMonth() + 1;
+        return new Date(value).getMonth() + 1;
     },
     getMinutes: function (value) {
-        return value.getMinutes();
+        const date = new Date(value);
+        const minutes = date.getMinutes();
+        return minutes < 10 ? '0' + minutes : minutes;
     },
     consoleLog: function (value) {
         console.log(value);
