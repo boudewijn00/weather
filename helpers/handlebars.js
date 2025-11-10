@@ -24,7 +24,7 @@ module.exports = {
         return new Date().getHours();
     },
     getDate: function (value) {
-        return new Date(value).getDate();
+        return new Date().getDate();
     },
     getDay: function (value) {
         return new Date(value).getDay();
@@ -39,12 +39,12 @@ module.exports = {
     },
     getDayName: function(value) {
         const days = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'];
-        const dayIndex = new Date(value).getDay();
+        const dayIndex = new Date().getDay();
         return days[dayIndex];
     },
     getMonthName: function(value) {
         const months = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'];
-        const monthIndex = new Date(value).getMonth();
+        const monthIndex = new Date().getMonth();
         return months[monthIndex];
     },
     consoleLog: function (value) {
