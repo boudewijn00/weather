@@ -15,7 +15,7 @@
         <div>
             <div class="space-y-1">
                 <div class="flex items-center">
-                    <span class="font-semibold w-16">Rain:</span>
+                    <span class="font-semibold w-12">Rain:</span>
                     <span>
                         {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
                             {{this.data.next_1_hours.details.precipitation_amount}}
@@ -26,7 +26,7 @@
                     </span>
                 </div>
                 <div class="flex items-center">
-                    <span class="font-semibold w-16">Wind:</span>
+                    <span class="font-semibold w-12">Wind:</span>
                     <span>{{toKmh this.data.instant.details.wind_speed}} <span class="text-sm">km/h</span></span>
                 </div>
             </div>
