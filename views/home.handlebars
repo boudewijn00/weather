@@ -4,15 +4,17 @@
     {{/if}}
     <div class="container mx-auto px-4">
         <div class="lg:flex lg:space-x-6">
-            <div class="space-y-6 lg:w-2/3">
+            <div class="lg:w-2/3">
                 <div class="lg:hidden">
                     {{#with (getFirstHour dates)}}
                         {{> currentWeather}}
                     {{/with}}
                 </div>
-            {{#each dates}}
-                {{> dailyForecast}}
-            {{/each}}
+                <div class="space-y-6">
+                {{#each dates}}
+                    {{> dailyForecast}}
+                {{/each}}
+                </div>
             </div>
 
             <div class="mt-6 lg:mt-0 space-y-4 lg:w-1/3">
