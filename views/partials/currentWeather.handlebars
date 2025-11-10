@@ -1,7 +1,7 @@
 <div class="bg-[#2B4162] backdrop-blur-md rounded-lg shadow-lg overflow-hidden text-[#F5F0F6]">
     <h2 class="text-xl lg:text-2xl font-bold px-4 py-3 sm:px-6">{{getHours time}}:{{getMinutes time}}</h2>
-    <div class="p-4 flex items-center justify-center">
-        <div class="flex justify-center">
+    <div class="p-4 flex items-center justify-start">
+        <div class="flex">
             {{#if (isNotEmpty this.data.next_1_hours.details.precipitation_amount)}}
                 <img class="w-24 h-24" src="/icons/{{this.data.next_1_hours.summary.symbol_code}}.png" title="{{this.data.next_1_hours.summary.symbol_code}}" />
             {{else}}
