@@ -47,6 +47,16 @@ module.exports = {
         const monthIndex = new Date().getMonth();
         return months[monthIndex];
     },
+    removeYear: function(dateString) {
+        if (typeof dateString !== 'string') {
+            return dateString;
+        }
+        const parts = dateString.split(',');
+        if (parts.length > 2) {
+            return parts.slice(0, 2).join(',');
+        }
+        return dateString;
+    },
     consoleLog: function (value) {
         console.log(value);
     },
