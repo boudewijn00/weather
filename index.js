@@ -104,7 +104,7 @@ const getCoordsByLocation = async(location) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://api.geoapify.com/v1/geocode/search?text='+location+'&apiKey='+key,
+        url: 'https://api.geoapify.com/v1/geocode/search?text='+location+'&apiKey='+key+'&type=city',
         headers: { }
       };
       
