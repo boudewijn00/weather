@@ -35,7 +35,8 @@ app.get('/', (req, res) => {
                     city: city,
                     lat: lat,
                     lon: lon,
-                    countryCode: countryCode
+                    countryCode: countryCode,
+                    timezone: timezone
                 });
             });
         });
@@ -56,7 +57,8 @@ app.get('/', (req, res) => {
                     city: city,
                     lat: lat,
                     lon: lon,
-                    countryCode: countryCode
+                    countryCode: countryCode,
+                    timezone: timezone
                 });
             });
         });

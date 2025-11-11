@@ -37,6 +37,24 @@ module.exports = {
         const minutes = date.getMinutes();
         return minutes < 10 ? '0' + minutes : minutes;
     },
+    getFormattedTimeByTimezone: function (value, timezone) {
+        if (!value) {
+            return '';
+        }
+        if (!timezone || !timezone.name) {
+            const date = new Date(value);
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            return hours + ':' + (minutes < 10 ? '0' + minutes : minutes);
+        }
+        const date = new Date(value);
+        return date.toLocaleTimeString('en-GB', {
+            timeZone: timezone.name,
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+    },
     getCurrentHours: function () {
         return new Date().getHours();
     },
