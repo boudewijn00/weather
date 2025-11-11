@@ -29,8 +29,10 @@ app.get('/', (req, res) => {
             const countryCode = data.properties.country_code;
 
             getWeather(lat, lon, timezone).then((data) => {
+                const groupedDates = groupTimeseries(data, timezone);
+                
                 res.render('home', {
-                    dates: groupTimeseries(data, timezone),
+                    dates: groupedDates,
                     last_update: new Date(data.data.properties.meta.updated_at),
                     city: city,
                     lat: lat,
