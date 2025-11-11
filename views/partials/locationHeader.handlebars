@@ -3,7 +3,7 @@
         <div>
             <h1 class="text-xl md:text-2xl font-bold">{{city}}, {{countryCode}}</h1>
             <p class="text-xs md:text-sm">
-                Last weather data update: {{getHours last_update}}:{{getMinutes last_update}}
+                Last weather data update: {{getFormattedTimeByTimezone last_update timezone}}
             </p>
         </div>
         <a href="/" class="bg-[#2B4162] hover:bg-[#2E4E5E] text-gray-100 font-semibold py-2 px-4 rounded-md shadow-md transition duration-300">

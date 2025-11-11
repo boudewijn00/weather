@@ -29,13 +29,16 @@ app.get('/', (req, res) => {
             const countryCode = data.properties.country_code;
 
             getWeather(lat, lon, timezone).then((data) => {
+                const groupedDates = groupTimeseries(data, timezone);
+                
                 res.render('home', {
-                    dates: groupTimeseries(data, timezone),
+                    dates: groupedDates,
                     last_update: new Date(data.data.properties.meta.updated_at),
                     city: city,
                     lat: lat,
                     lon: lon,
-                    countryCode: countryCode
+                    countryCode: countryCode,
+                    timezone: timezone
                 });
             });
         });
@@ -56,7 +59,8 @@ app.get('/', (req, res) => {
                     city: city,
                     lat: lat,
                     lon: lon,
-                    countryCode: countryCode
+                    countryCode: countryCode,
+                    timezone: timezone
                 });
             });
         });
@@ -150,8 +154,6 @@ const groupTimeseries = (response, timezone) => {
         });
         
         if (!acc[key]) {
-            delete acc['time'];
-            delete acc['data'];
             acc[key] = [];
         }
 
@@ -159,7 +161,7 @@ const groupTimeseries = (response, timezone) => {
         acc[key].push(curr);
 
         return acc;     
-    });
+    }, {});
 
     return grouped;
 }
