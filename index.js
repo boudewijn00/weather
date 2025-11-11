@@ -154,8 +154,6 @@ const groupTimeseries = (response, timezone) => {
         });
         
         if (!acc[key]) {
-            delete acc['time'];
-            delete acc['data'];
             acc[key] = [];
         }
 
@@ -163,7 +161,7 @@ const groupTimeseries = (response, timezone) => {
         acc[key].push(curr);
 
         return acc;     
-    });
+    }, {});
 
     return grouped;
 }
